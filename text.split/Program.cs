@@ -11,28 +11,35 @@ namespace text.split
         static void Main(string[] args)
         {
             var inStr = Console.ReadLine();
-            var add = false;
+            var strB = new StringBuilder();
+            foreach (char c in inStr){if (!char.IsPunctuation(c)) { strB.Append(c);}}
+            inStr = strB.ToString();
+            var found = false;
             List < string > strList= new List<string>();
             List<Word> words = new List<Word>();
-            strList = inStr.Split().ToList();
+            strList = inStr.ToLower().Split().ToList();
             for (int i = 0; i < strList.Count; i++)
             {
                 var strCheck = strList[i];
-                add = false;
+                found = false;
                 foreach (Word wordInst in words)
                 {
-                    if (wordInst.word == strCheck)
-                        wordInst.count++;
-                    else
-                        add = true;
-
+                    if (!found)
+                    {
+                        if (wordInst.word == strCheck)
+                        {
+                            found = true;
+                            wordInst.count++;
+                        }
+                    }
                 }
-                if (add || words.Count == 0)
+                if (!found || words.Count == 0)
                 {
                     words.Add(new Word(strCheck));
-
                 }
             }
+            foreach (Word wo in words)
+                Console.WriteLine(@"""{0}"": {1}", wo.word, wo.count);
             Console.Read();
         }
     }
