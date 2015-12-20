@@ -51,15 +51,17 @@ namespace text.split
             Console.Write(t);
             File.WriteAllText(p,t);
             int index = 1;
+            float totalP = 0;
             foreach (Word wo in words.OrderByDescending(o => o.count).ThenBy(s => s.word).ToList())
             {
                 float percent = (float)Math.Round(((float)wo.count / (float)strList.Count) * 100,2);
+                totalP += percent;
                 string txt = String.Format(@"{0}. ""{1}"": {2} {3}. {4}% of the input", index, wo.word, wo.count, (wo.count != 1)?"occurences":"occurence", percent) + Environment.NewLine;
                 Console.Write(txt);
                 File.AppendAllText(p, txt);
                 index++;
             }
-            t = string.Format("Total words: {0} Unique words: {1}", strList.Count, words.Count);
+            t = string.Format("Total words: {0} Unique words: {1} {2}% total percentage", strList.Count, words.Count,Environment.NewLine + totalP);
             Console.Write(t);
             File.AppendAllText(p,t);
             #endregion
