@@ -32,11 +32,12 @@ namespace text.split
                 found = false;
                 foreach (Word wordInst in words)
                 {
-                        if (wordInst.word == strCheck && !found)
-                        {
-                            found = true;
-                            wordInst.count++;
-                        }
+                    if (wordInst.word == strCheck && !found)
+                    {
+                        found = true;
+                        wordInst.count++;
+                        break;
+                    }
                 }
                 if (!found || words.Count == 0)
                 {
