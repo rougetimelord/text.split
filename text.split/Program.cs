@@ -54,7 +54,7 @@ namespace text.split
             foreach (Word wo in words.OrderByDescending(o => o.count).ThenBy(s => s.word).ToList())
             {
                 float percent = (float)Math.Round(((float)wo.count / (float)strList.Count) * 100,2);
-                string txt = String.Format(@"{0}. ""{1}"": {2} {3} {4}%", index, wo.word, wo.count, (wo.count != 1)?"occurences":"occurence", percent) + Environment.NewLine;
+                string txt = String.Format(@"{0}. ""{1}"": {2} {3}. {4}% of the input", index, wo.word, wo.count, (wo.count != 1)?"occurences":"occurence", percent) + Environment.NewLine;
                 Console.Write(txt);
                 File.AppendAllText(p, txt);
                 index++;
